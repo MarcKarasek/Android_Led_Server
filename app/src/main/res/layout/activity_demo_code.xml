@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="androidserver.marc.androidserver.DemoCode">
+
+    <TextView
+        android:id="@+id/ipaddr"
+        android:layout_width="152dp"
+        android:layout_height="31dp"
+        android:text="@string/ipaddr"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="466dp" />
+
+    <TextView
+        android:id="@+id/port"
+        android:layout_width="152dp"
+        android:layout_height="31dp"
+        android:text="@string/port"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.691"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/ipaddr"
+        app:layout_constraintVertical_bias="0.22" />
+
+
+    <Button
+        android:id="@+id/srvrdisconnect"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="86dp"
+        android:background="@color/colorPrimary"
+        android:onClick="server_disconnect"
+        android:text="@string/disconnect"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="0.854" />
+
+    <Button
+        android:id="@+id/startDemo"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="50dp"
+        android:layout_height="44dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="383dp"
+        android:background="@color/colorPrimary"
+        android:onClick="on_start"
+        android:text="@string/start"
+        android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/stopDemo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/srvrkill"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/kill_srvr"
+        android:onClick="server_kill"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/srvrdisconnect"
+        app:layout_constraintVertical_bias="0.606" />
+
+    <Button
+        android:id="@+id/stopDemo"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:onClick="demo_stop"
+        android:layout_width="62dp"
+        android:layout_height="43dp"
+        android:background="@color/colorPrimary"
+        android:text="STOP"
+        android:layout_marginRight="83dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="176dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <RadioGroup
+        android:id="@+id/RGroup1"
+        android:layout_width="364dp"
+        android:layout_height="346dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@+id/select_demo1"
+        app:layout_constraintBottom_toTopOf="@+id/startDemo"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RadioButton
+            android:id="@+id/select_demo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo1" />
+
+        <RadioButton
+            android:id="@+id/select_demo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@android:drawable/btn_star"
+            android:duplicateParentState="false"
+            android:text="@string/demo2" />
+
+        <RadioButton
+            android:id="@+id/select_demo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo3" />
+
+        <RadioButton
+            android:id="@+id/select_demo4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo4" />
+
+        <RadioButton
+            android:id="@+id/select_demo5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo5" />
+
+        <RadioButton
+            android:id="@+id/select_demo6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo6" />
+
+        <RadioButton
+            android:id="@+id/select_demo7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo7" />
+
+        <RadioButton
+            android:id="@+id/select_demo8"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo8" />
+
+        <RadioButton
+            android:id="@+id/select_demo9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@android:drawable/btn_star"
+            android:text="@string/demo9" />
+
+
+    </RadioGroup>
+
+
+
+
+</android.support.constraint.ConstraintLayout>

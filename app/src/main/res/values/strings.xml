@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Android_LED_Client</string>
+    <string name="ipaddr">IPAddr</string>
+    <string name="connect">Connect</string>
+    <string name="port">Port</string>
+    <string name="start">Start</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="demo1">Ant</string>
+    <string name="demo2">Color Pulse Gen</string>
+    <string name="demo3">Game of Life</string>
+    <string name="demo4">Gray Scale Blcok</string>
+    <string name="demo5">Rotating Block</string>
+    <string name="demo6">Sandpile</string>
+    <string name="demo7">Simple Square</string>
+    <string name="demo8">Volume Bars</string>
+    <string name="demo9">None</string>
+    <string name="ip_address_of_server">IP Address of Server</string>
+    <string name="port_number_of_server">Port Number of Server</string>
+    <string name="ip_address">IP Address</string>
+    <string name="kill_srvr">Kill Srvr</string>
+</resources>
