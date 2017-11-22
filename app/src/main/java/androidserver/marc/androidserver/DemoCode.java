@@ -76,6 +76,10 @@ public class DemoCode extends AppCompatActivity {
         srvr_snd.tcpstop(ipaddr, port);
         // Send the Disconnect Command to the Server.
         srvr_snd.send_disconnect(ipaddr, port);
+        // Clean up after ourselves..
+        // and go back to the main activity
+        demo_ui_thandler.quitSafely();
+        finish();
     }
 
     /* Called when the user taps the Kill Srvr button */
@@ -85,6 +89,10 @@ public class DemoCode extends AppCompatActivity {
         srvr_snd.tcpstop(ipaddr, port);
         // send the Serer kill
         srvr_snd.srvr_kill(ipaddr, port);
+        // Clean up after ourselves..
+        // and go back to the main activity
+        demo_ui_thandler.quitSafely();
+        finish();
     }
 
     // Send the stop message to the demo_handler Handler.
@@ -250,8 +258,6 @@ public class DemoCode extends AppCompatActivity {
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
 
-
-
         // Langton's ant
         public void run() {
 
@@ -312,6 +318,13 @@ public class DemoCode extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            Frame_Ant.Clear();
+            try {
+                Frame_Ant.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             try {
@@ -401,6 +414,13 @@ public class DemoCode extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            Frame_ColorPulseGenerator.Clear();
+            try {
+                Frame_ColorPulseGenerator.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             try {
@@ -513,6 +533,13 @@ public class DemoCode extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            Frame_GameLife.Clear();
+            try {
+                Frame_GameLife.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             try {
@@ -658,6 +685,13 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
+            Frame_GrayScaleBlock.Clear();
+            try {
+                Frame_GrayScaleBlock.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             try {
                 Frame_GrayScaleBlock.CloseTCP(ipaddr_, port_);
             } catch (IOException e) {
@@ -757,6 +791,13 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
+            Frame_RBlock.Clear();
+            try {
+                Frame_RBlock.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             try {
                 Frame_RBlock.CloseTCP(ipaddr_, port_);
             } catch (IOException e) {
@@ -848,6 +889,13 @@ public class DemoCode extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            Frame_Sandpile.Clear();
+            try {
+                Frame_Sandpile.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             try {
@@ -947,6 +995,14 @@ public class DemoCode extends AppCompatActivity {
                     runonce_ = false;
                 }
             }
+
+            Frame_SimpleSquare.Clear();
+            try {
+                Frame_SimpleSquare.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             try {
                 Frame_SimpleSquare.CloseTCP(ipaddr_, port_);
             } catch (IOException e) {
@@ -1079,6 +1135,13 @@ public class DemoCode extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            Frame_VolumeBars.Clear();
+            try {
+                Frame_VolumeBars.DumpToWeb(ipaddr, port);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             try {
