@@ -526,16 +526,15 @@ public class Framebuffer {
         int y;
         short mask;
         int plane_bits;
-        short red = MapColor((byte) r);
-        short green = MapColor((byte) g);
-        short blue = MapColor((byte) b);
+        short red = MapColor(r);
+        short green = MapColor(g);
+        short blue = MapColor(b);
         int bits;
+        int valueat;
 
         for (y = kBitPlanes_ - pwm_bits_; y < kBitPlanes_; ++y) {
-            mask = (short) (1 << b);
-
+            mask = (short) (1 << y);
             bits = 0;
-
             bits = set_r1( ( (red & mask) == mask ) ? 1 : 0, bits);
             bits = set_g1( ( (green & mask) == mask) ? 1 : 0, bits);
             bits = set_b1( ( (blue & mask) == mask) ? 1 : 0, bits);
@@ -543,14 +542,13 @@ public class Framebuffer {
             bits = set_g2( ( (green & mask) == mask) ? 1 : 0, bits);
             bits = set_b2( ( (blue & mask) == mask) ? 1 : 0, bits);
 
-            Arrays.fill(bitplane_buffer_, bits);
-
-            // Cycle through all rows/columns to set the values..
-            //for (int row = 0; row < double_rows_; ++row) {
-            //    for (int col = 0; col < columns_; ++col) {
-            //        ValuePut(row, col, b, getIoBits());
-            //    }
-            //}
+            for (int row = 0; row < double_rows_; ++row) {
+                valueat =  row * (columns_ * kBitPlanes_) + y * columns_ ;
+                for (int col = 0; col < columns_; ++col) {
+                    bitplane_buffer_[valueat] = bits;
+                    valueat ++;
+                }
+            }
         }
     }
 

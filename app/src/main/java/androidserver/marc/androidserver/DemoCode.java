@@ -87,7 +87,7 @@ public class DemoCode extends AppCompatActivity {
         send_srvr srvr_snd = new send_srvr();
         // Send the Connect Stop
         srvr_snd.tcpstop(ipaddr, port);
-        // send the Serer kill
+        // send the Server kill
         srvr_snd.srvr_kill(ipaddr, port);
         // Clean up after ourselves..
         // and go back to the main activity
@@ -152,22 +152,21 @@ public class DemoCode extends AppCompatActivity {
     }
 
     // Thread Handler Classes used to communicate between UI and Demo Threads
-
     // extending handler class to handle messages sent to Demo thread
     private class DemoThreadHandler extends HandlerThread {
 
         // Public variable to set/check on while() loop in demo code
         private boolean demoRunning = true;
 
-        void demoRun(){
+        synchronized void demoRun(){
             demoRunning = true;
         }
 
-        void demoStop(){
+        synchronized void demoStop(){
             demoRunning = false;
         }
 
-        boolean getRunning(){
+        synchronized boolean getRunning(){
             return demoRunning;
         }
 
@@ -256,6 +255,8 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder.waitForready();
 
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
+
+            Frame_Ant.Clear();
         }
 
         // Langton's ant
@@ -320,12 +321,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_Ant.Clear();
-            try {
-                Frame_Ant.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_Ant.Clear();
+//            try {
+//                Frame_Ant.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_Ant.CloseTCP(ipaddr_, port_);
@@ -366,6 +367,7 @@ public class DemoCode extends AppCompatActivity {
 
         private String ipaddr_;
         private int port_;
+        private int continuum;
 
         private Framebuffer Frame_ColorPulseGenerator = new Framebuffer();
 
@@ -373,22 +375,25 @@ public class DemoCode extends AppCompatActivity {
             port_= port;
             ipaddr_ = ipaddr;
 
+            continuum = 0;
+
             demo_thanlder = new DemoThreadHandler("COLORPULSE");
             demo_thanlder.start();
             demo_thanlder.waitForready();
+
+            Frame_ColorPulseGenerator.Clear();
 
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
 
         public void run() {
-            int continuum = 0;
 
             // Set the flag to turn on the demo
             demo_thanlder.demoRun();
 
             while(demo_thanlder.getRunning()) {
                 try {
-                    Thread.sleep(5 * 1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -407,7 +412,7 @@ public class DemoCode extends AppCompatActivity {
                     g = 255 - c;
                     b = c;
                 }
-                Frame_ColorPulseGenerator.Fill((byte)r, (byte)g, (byte)b);
+                Frame_ColorPulseGenerator.Fill(r, g, b);
 
                 try {
                     Frame_ColorPulseGenerator.DumpToWeb(ipaddr_, port_);
@@ -416,12 +421,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_ColorPulseGenerator.Clear();
-            try {
-                Frame_ColorPulseGenerator.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_ColorPulseGenerator.Clear();
+//            try {
+//                Frame_ColorPulseGenerator.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_ColorPulseGenerator.CloseTCP(ipaddr_, port_);
@@ -504,6 +509,8 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder.start();
             demo_thanlder.waitForready();
 
+            Frame_GameLife.Clear();
+
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
 
@@ -535,12 +542,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_GameLife.Clear();
-            try {
-                Frame_GameLife.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_GameLife.Clear();
+//            try {
+//                Frame_GameLife.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_GameLife.CloseTCP(ipaddr_, port_);
@@ -640,6 +647,8 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder.start();
             demo_thanlder.waitForready();
 
+            Frame_GrayScaleBlock.Clear();
+
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
 
@@ -673,8 +682,10 @@ public class DemoCode extends AppCompatActivity {
                     }
                 }
                 count++;
+                if (count == 0x10)
+                    count = 0;
                 try {
-                    Thread.sleep(2 * 1000);
+                    Thread.sleep(1 * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -685,12 +696,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_GrayScaleBlock.Clear();
-            try {
-                Frame_GrayScaleBlock.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_GrayScaleBlock.Clear();
+//            try {
+//                Frame_GrayScaleBlock.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_GrayScaleBlock.CloseTCP(ipaddr_, port_);
@@ -727,6 +738,8 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder = new DemoThreadHandler("RBLOCK");
             demo_thanlder.start();
             demo_thanlder.waitForready();
+
+            Frame_RBlock.Clear();
 
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
@@ -791,12 +804,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_RBlock.Clear();
-            try {
-                Frame_RBlock.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_RBlock.Clear();
+//            try {
+//                Frame_RBlock.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_RBlock.CloseTCP(ipaddr_, port_);
@@ -847,6 +860,8 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder.start();
             demo_thanlder.waitForready();
 
+            Frame_Sandpile.Clear();
+
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
 
@@ -891,12 +906,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_Sandpile.Clear();
-            try {
-                Frame_Sandpile.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_Sandpile.Clear();
+//            try {
+//                Frame_Sandpile.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_Sandpile.CloseTCP(ipaddr_, port_);
@@ -946,6 +961,10 @@ public class DemoCode extends AppCompatActivity {
         private String ipaddr_;
         private int port_;
 
+        private boolean runonce_ = true;
+
+        private Framebuffer Frame_SimpleSquare = new Framebuffer();
+
         SimpleSquare(int rows, int columns, String ipaddr, int port) {
 
             height = rows;
@@ -957,12 +976,10 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder.start();
             demo_thanlder.waitForready();
 
+            Frame_SimpleSquare.Clear();
+
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
-
-        private boolean runonce_ = true;
-
-        private Framebuffer Frame_SimpleSquare = new Framebuffer();
 
         public void run() {
 
@@ -996,12 +1013,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_SimpleSquare.Clear();
-            try {
-                Frame_SimpleSquare.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_SimpleSquare.Clear();
+//            try {
+//                Frame_SimpleSquare.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_SimpleSquare.CloseTCP(ipaddr_, port_);
@@ -1053,6 +1070,8 @@ public class DemoCode extends AppCompatActivity {
             demo_thanlder = new DemoThreadHandler("VBARS");
             demo_thanlder.start();
             demo_thanlder.waitForready();
+
+            Frame_VolumeBars.Clear();
 
             demo_ui_handler.sendEmptyMessage(MSG_DEMO_STARTED);
         }
@@ -1137,12 +1156,12 @@ public class DemoCode extends AppCompatActivity {
                 }
             }
 
-            Frame_VolumeBars.Clear();
-            try {
-                Frame_VolumeBars.DumpToWeb(ipaddr, port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Frame_VolumeBars.Clear();
+//            try {
+//                Frame_VolumeBars.DumpToWeb(ipaddr_, port);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 Frame_VolumeBars.CloseTCP(ipaddr_, port_);
