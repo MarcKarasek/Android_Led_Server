@@ -237,7 +237,7 @@ public class DemoCode extends AppCompatActivity {
         private int antX_;
         private int antY_;
         private int antDir_; // 0 right, 1 up, 2 left, 3 down
-        private  int delay_ms_ = 500;
+        private  int delay_ms_ = 4000; // 1 sec
 
         private Framebuffer Frame_Ant = new Framebuffer();
 
@@ -306,11 +306,15 @@ public class DemoCode extends AppCompatActivity {
                         break;
                 }
                 updatePixel(oldX, oldY);
-                if (antX_ < 0 || antX_ >= width || antY_ < 0 || antY_ >= height)
-                    return;
+                // if we ever go off the reservation reset back to the center again..
+                if (antX_ < 0 || antX_ >= width || antY_ < 0 || antY_ >= height) {
+                    antX_ = width/2;
+                    antY_ = height/2-3;
+                    antDir_ = 0;
+                }
                 updatePixel(antX_, antY_);
                 try {
-                    Thread.sleep(delay_ms_ * 1000);
+                    Thread.sleep(delay_ms_ );
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -393,7 +397,7 @@ public class DemoCode extends AppCompatActivity {
 
             while(demo_thanlder.getRunning()) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -531,7 +535,7 @@ public class DemoCode extends AppCompatActivity {
                     }
                 }
                 try {
-                    Thread.sleep(delay_ms * 1000);
+                    Thread.sleep(0, delay_ms * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -778,7 +782,7 @@ public class DemoCode extends AppCompatActivity {
             while(demo_thanlder.getRunning()) {
                 ++rotation;
                 try {
-                    Thread.sleep(15* 1000);
+                    Thread.sleep(0, 15* 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -895,7 +899,7 @@ public class DemoCode extends AppCompatActivity {
                     }
                 }
                 try {
-                    Thread.sleep(delay_ms_ * 1000);
+                    Thread.sleep(0, delay_ms_ * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -1145,7 +1149,7 @@ public class DemoCode extends AppCompatActivity {
                     }
                 }
                 try {
-                    Thread.sleep(delay_ms_ * 1000);
+                    Thread.sleep(0,delay_ms_ * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

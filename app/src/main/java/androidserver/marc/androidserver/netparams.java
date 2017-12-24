@@ -42,7 +42,7 @@ class netparams {
         demo = -1;
         rows = 32;
         chain = 1;
-        scroll_ms = 30;
+        scroll_ms = 1000;
         pwm_bits = -1;
         large_display = 0;
         do_luminance_correct = 1;
